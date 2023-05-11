@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core'
+import { Component, computed, effect, signal } from '@angular/core'
 
 @Component({
 	standalone: true,
@@ -12,6 +12,10 @@ import { Component, computed, signal } from '@angular/core'
 export class AppComponent {
 	count = signal(5)
 	double = computed(() => this.count() * 2)
+
+	constructor() {
+		effect(() => console.log(`Value: ${this.double()}`))
+	}
 
 	increment(): void {
 		this.count.update((count) => count + 1)
